@@ -1,0 +1,13 @@
+{
+  "name": "BillyFrontendActivityBot",
+  "version": "0.0.1",
+  "description": "Telegram bot for Kontur.Billing frontenders going out activity",
+  "main": "index.js",
+  "repository": "https://github.com/vansosnin/billy-front-activity-bot",
+  "author": "Ivan Sosnin <vansosnin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "0.15.3",
+    "node-telegram-bot-api": "0.25.0"
+  }
+}
