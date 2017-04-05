@@ -16,8 +16,8 @@ class BotMechanics {
             this.sendMessage(msg.chat.id, message);
         });
 
-        this._bot.onText(/([\d]+)/, (msg, match) => {
-            const taskNumber = match[1];
+        this._bot.onText(/([hjkHJK]{1}[\d]+)/, (msg, match) => {
+            const taskNumber = match[1].toLowerCase();
 
             this.getTaskText(taskNumber)
                 .then(text => {
