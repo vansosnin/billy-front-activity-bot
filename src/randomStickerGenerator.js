@@ -8,7 +8,7 @@ module.exports = () => {
         'CAADAgADvAADlSooAAHNCwV_1LVlXgI', // Seva
         'CAADAgADsQADlSooAAFBBTeb26CoCAI', // Yurchik
         'CAADAgADswADlSooAAGUPZ-L_mpkfwI', // Leo
-        'CAADAgADtwADlSooAAHXz8xxZwHabQI' // Keanu
+        'CAADAgADtwADlSooAAHXz8xxZwHabQI'  // Keanu
     ];
     return stickers[Math.floor(Math.random() * stickers.length)];
 };

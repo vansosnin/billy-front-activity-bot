@@ -1,3 +1,4 @@
+const fs = require('fs');
 const TelegramBot = require('node-telegram-bot-api');
 const config = require('../config.json');
 const getRandomSticker = require('./randomStickerGenerator');
@@ -18,24 +19,31 @@ class BotMechanics {
         this._bot.onText(/([\d]+)/, (msg, match) => {
             const taskNumber = match[1];
 
-            this.sendMessage(msg.chat.id, 'Я здесь 👋');
-
-            try {
-                const taskText = this.getTaskText(taskNumber);
-                this.sendMessage(taskText);
-            } catch (e) {
-                this.sendMessage(msg.chat.id, getRandomSticker());
-                this._bot.sendSticker(msg.chat.id, getRandomSticker());
-            }
+            this.getTaskText(taskNumber)
+                .then(text => {
+                    this.sendMessage(msg.chat.id, text);
+                })
+                .catch(() => {
+                    this._bot.sendSticker(msg.chat.id, getRandomSticker());
+                });
         });
     }
 
     getTaskText(taskNumber) {
-        return require(`../tasks/${taskNumber}.md`);
+        return new Promise((resolve, reject) => {
+            fs.readFile(`./tasks/${taskNumber}.md`, 'utf8', (err, text) => {
+                if (err) {
+                    console.log(err);
+                    reject();
+                }
+
+                resolve(text);
+            });
+        });
     }
 
     sendMessage(chatId, message) {
-        this._bot.sendMessage(chatId, message, {'parse_mode': 'Markdown'});
+        this._bot.sendMessage(chatId, message, { 'parse_mode': 'Markdown' });
     }
 }
 
